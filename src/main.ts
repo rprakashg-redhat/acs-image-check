@@ -1,11 +1,10 @@
 import * as core from "@actions/core";
 import * as io from "@actions/io";
-import { Inputs, Outputs } from "./generated/inputs-outputs";
 import * as ioUtil from "@actions/io/lib/io-util";
 import * as path from "path";
 import * as fs from "mz/fs";
 import * as uuidV4 from "uuid/v4";
-
+import { Inputs, Outputs } from "./generated/inputs-outputs";
 import { Command } from "./command";
 import { UploadArtifact } from "./uploadArtifact";
 
