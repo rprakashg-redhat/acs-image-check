@@ -1,7 +1,7 @@
 {
-    "name": "setup-roxctl",
-    "displayName": "Setup roxctl cli",
-    "description": "Download and install roxctl cli",
+    "name": "acs-image-check",
+    "displayName": "RHACS Image Check",
+    "description": "Check container image for build time policy violations",
     "main": "dist/index.js",
     "scripts": {
         "compile": "tsc -p .",
