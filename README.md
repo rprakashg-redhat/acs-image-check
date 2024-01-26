@@ -3,7 +3,7 @@ Check images for build time policy violations, and report them.
 
 # Usage
 ```yaml
-- uses: rprakashg-redhat/acs-image-scanl@main
+- uses: rprakashg-redhat/acs-image-check@main
   with:
     # Central endpoint
     central: ""
@@ -11,13 +11,13 @@ Check images for build time policy violations, and report them.
     # ROX Api token
     api-token: ""
 
-    # Container Image to run a vulnerability scan on
+    # Container Image to check for build time policy violations
     image: ""
 
     # output format valid values (table|csv|json|sarif)
     output: ""
 
-    # directory where the vulnerability scan output report should be created
+    # directory to create output from image check should be created
     output-path: ""
 ```
 
