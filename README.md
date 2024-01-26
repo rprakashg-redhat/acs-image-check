@@ -1,31 +1,24 @@
-# setup-roxctl
-Javascript Github action written in Typescript which can be used to download and install roxctl cli for Red Hat Advanced Cluster Security (RHACS) for kubernetes. Action will download platform specific version based on the runner OS and defaults to latest version if no version is specified via input.
+# acs-image-check
+Check images for build time policy violations, and report them.
 
 # Usage
 ```yaml
-- uses: rprakashg-redhat/setup-roxctl@main
+- uses: rprakashg-redhat/acs-image-scanl@main
   with:
-    # Version of roxctl to be downloaded
-    # Default: latest
-    version: ""
-```
+    # Central endpoint
+    central: ""
 
-# Scenarios
-- [Download latest version](#download-latest-version)
-- [Download specific version](#download-specific-version)
+    # ROX Api token
+    api-token: ""
 
-## Download latest version
-```yaml
-- uses: rprakashg-redhat/setup-roxctl@main
-  with:
-    version: "latest"
-```
+    # Container Image to run a vulnerability scan on
+    image: ""
 
-## Download specific version
-```yaml
-- uses: rprakashg-redhat/setup-roxctl@main
-  with:
-    version: "4.3.4"
+    # output format valid values (table|csv|json|sarif)
+    output: ""
+
+    # directory where the vulnerability scan output report should be created
+    output-path: ""
 ```
 
 ## Example 
@@ -33,24 +26,19 @@ Javascript Github action written in Typescript which can be used to download and
 name: example
 on:
   workflow_dispatch:
-    inputs:
-      version:
-        description: Version of roxctl to setup
-        type: string
-        default: "latest"
 jobs:
-  test:
+  analyze:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: setup roxctl
-        id: setup-roxctl
+      - uses: rprakashg-redhat/setup-roxctl@main
+      - name: run image check
         uses: ./
         with:
-          version: ${{ inputs.version }}
-      - name: verify
-        run: |
-          ./roxctl version
-          ./roxctl help
+          image: "ghcr.io/rprakashg-redhat/eventscheduler@sha256:ba9347ae0d0857ea9b11d1e7bb63e86c960cb9d670cf48330b4e22fd9fd1e4df"
+          api-token: ${{ secrets.ROX_API_TOKEN }}
+          central: ${{ secrets.ROX_CENTRAL }}
+          output: table
+          output-path: ${{ runner.temp }}
 ```
 
