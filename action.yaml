@@ -1,0 +1,28 @@
+name: acs-image-check
+description: Check images for build time policy violations, and report them
+author: 'Ram Gopinathan'
+branding:
+  icon: circle
+  color: red
+inputs:
+  central:
+    description: central endpoint
+    required: true
+  api-token:
+    description: api token to talk to central
+    required: true
+  image:
+    description: container image to check for build time policy violations
+    required: true
+  output:
+    description: output format (table | csv | json | sarif )
+    default: json
+  output-path:
+    description: directory where output file should be created.
+    required: true
+outputs:
+  pass:
+    description: Build time policy checks completed successfully
+runs:
+  using: 'node20'
+  main: 'dist/index.js'  
